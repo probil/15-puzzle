@@ -15,5 +15,8 @@
   "bugs": {
     "url": "https://github.com/probil/15-puzzle/issues"
   },
-  "homepage": "https://github.com/probil/15-puzzle#readme"
+  "homepage": "https://github.com/probil/15-puzzle#readme",
+  "devDependencies": {
+    "parcel-bundler": "^1.12.3"
+  }
 }
