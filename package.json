@@ -17,6 +17,7 @@
   },
   "homepage": "https://github.com/probil/15-puzzle#readme",
   "devDependencies": {
+    "jest": "^24.7.1",
     "parcel-bundler": "^1.12.3"
   }
 }
