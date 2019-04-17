@@ -1,4 +1,4 @@
-import { generateField } from '../utils';
+import { generateField, fillWithInitialData } from '../utils';
 
 describe('generateField()', () => {
   it('is a function', () => {
@@ -42,5 +42,83 @@ describe('generateField()', () => {
       [0, 0],
       [0, 0],
     ]);
+  });
+});
+
+describe('fillWithInitialData()', () => {
+  it('is a function', () => {
+    expect(fillWithInitialData).toEqual(expect.any(Function));
+  });
+  it('creates an array the same size as given field', () => {
+    const actual = fillWithInitialData([
+      [0, 0],
+      [0, 0],
+    ]);
+    expect(actual).toHaveLength(2);
+    expect(actual[0]).toHaveLength(2);
+    expect(actual[1]).toHaveLength(2);
+
+    const actual2 = fillWithInitialData([
+      [0, 0, 0],
+      [0, 0, 0],
+      [0, 0, 0],
+      [0, 0, 0],
+    ]);
+    expect(actual2).toHaveLength(4);
+    expect(actual2[0]).toHaveLength(3);
+    expect(actual2[1]).toHaveLength(3);
+    expect(actual2[1]).toHaveLength(3);
+    expect(actual2[1]).toHaveLength(3);
+  });
+  it('doesn\'t modify initial matrix', () => {
+    const initialField = Object.freeze([
+      Object.freeze([0, 0, 0]),
+      Object.freeze([0, 0, 0]),
+      Object.freeze([0, 0, 0]),
+      Object.freeze([0, 0, 0]),
+    ]);
+    expect(() => {
+      const newField = fillWithInitialData(initialField);
+      newField[0][0] = 1000;
+    }).not.toThrow();
+  });
+  it.each([
+    {
+      initial: [
+        [0, 0],
+        [0, 0],
+      ],
+      expected: [
+        [1, 2],
+        [3, 0],
+      ],
+    },
+    {
+      initial: [
+        [0, 0, 0],
+        [0, 0, 0],
+      ],
+      expected: [
+        [1, 2, 3],
+        [4, 5, 0],
+      ],
+    },
+    {
+      initial: [
+        [0, 0],
+        [0, 0],
+        [0, 0],
+        [0, 0],
+      ],
+      expected: [
+        [1, 2],
+        [3, 4],
+        [5, 6],
+        [7, 0],
+      ],
+    },
+  ])('correctly fills matrix with values', ({ initial, expected }) => {
+    const actual = fillWithInitialData(initial);
+    expect(actual).toEqual(expected);
   });
 });

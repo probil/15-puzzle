@@ -9,3 +9,19 @@ export const generateField = ({ height, width }) => {
   return Array(height).fill(0)
     .map(() => Array(width).fill(0));
 };
+
+/**
+ * @param {number[][]} field
+ * @returns {number[][]}
+ */
+export const fillWithInitialData = (field) => {
+  let startNumber = 0;
+  const newField = field.map(row => (
+    row.map(() => {
+      startNumber += 1;
+      return startNumber;
+    })
+  ));
+  newField[field.length - 1][field[0].length - 1] = 0;
+  return newField;
+};
