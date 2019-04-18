@@ -23,9 +23,13 @@
   },
   "homepage": "https://github.com/probil/15-puzzle#readme",
   "devDependencies": {
+    "@babel/core": "^7.4.3",
+    "@babel/preset-env": "^7.4.3",
+    "babel-jest": "^24.7.1",
     "eslint": "^5.3.0",
     "eslint-config-airbnb-base": "^13.1.0",
     "eslint-plugin-import": "^2.17.1",
+    "eslint-plugin-jest": "^22.4.1",
     "jest": "^24.7.1",
     "parcel-bundler": "^1.12.3"
   }
