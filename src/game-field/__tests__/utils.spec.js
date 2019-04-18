@@ -1,4 +1,4 @@
-import { generateField, fillWithInitialData } from '../utils';
+import { generateField, fillWithInitialData, shuffle } from '../utils';
 
 describe('generateField()', () => {
   it('is a function', () => {
@@ -120,5 +120,35 @@ describe('fillWithInitialData()', () => {
   ])('correctly fills matrix with values', ({ initial, expected }) => {
     const actual = fillWithInitialData(initial);
     expect(actual).toEqual(expected);
+  });
+});
+
+describe('shuffle()', () => {
+  it('is a function', () => {
+    expect(shuffle).toEqual(expect.any(Function));
+  });
+  it('shuffles given field', () => {
+    const field = [
+      [1, 2, 3, 4],
+      [5, 6, 7, 8],
+      [9, 10, 11, 12],
+      [13, 14, 15, 0],
+    ];
+    const shuffledField = shuffle(field);
+    expect(shuffledField).not.toEqual(field);
+  });
+
+  it('works with non-square field', () => {
+    const field = [
+      [1, 2, 3, 4],
+      [5, 6, 7, 8],
+      [9, 10, 11, 12],
+      [13, 14, 15, 0],
+    ];
+    let shuffledField;
+    expect(() => {
+      shuffledField = shuffle(field);
+    }).not.toThrow();
+    expect(shuffledField).not.toEqual(field);
   });
 });
