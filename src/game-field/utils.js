@@ -1,7 +1,19 @@
 /**
+ * 2D array of positive numbers that represents game field
+ * @typedef {(number[][])} GameField
+ * @example
+ * [
+ *  [1,   2,  3,  4],
+ *  [5,   6,  7,  8],
+ *  [9,  10, 11, 12],
+ *  [13, 14, 15,  0],
+ * ]
+ */
+
+/**
  * @param {number} height
  * @param {number} width
- * @return {number[][]}
+ * @return {GameField}
  */
 export const generateField = ({ height, width }) => {
   if (height < 2) throw new Error('Field height should be larger then 2 squares');
@@ -11,8 +23,8 @@ export const generateField = ({ height, width }) => {
 };
 
 /**
- * @param {number[][]} field
- * @returns {number[][]}
+ * @param {GameField} field
+ * @returns {GameField}
  */
 export const fillWithInitialData = (field) => {
   let startNumber = 0;
