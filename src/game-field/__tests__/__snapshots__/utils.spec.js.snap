@@ -1,0 +1,13 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`generateField() throws an error if height is less then 2 1`] = `"Field height should be larger then 2 squares"`;
+
+exports[`generateField() throws an error if height is less then 2 2`] = `"Field height should be larger then 2 squares"`;
+
+exports[`generateField() throws an error if height is less then 2 3`] = `"Field height should be larger then 2 squares"`;
+
+exports[`generateField() throws an error if width is less then 2 1`] = `"Field width should be larger then 2 squares"`;
+
+exports[`generateField() throws an error if width is less then 2 2`] = `"Field width should be larger then 2 squares"`;
+
+exports[`generateField() throws an error if width is less then 2 3`] = `"Field width should be larger then 2 squares"`;
