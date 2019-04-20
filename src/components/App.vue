@@ -7,7 +7,7 @@
 </template>
 <script>
   import PlayBox from './PlayBox'
-  import GameField from './game-field/GameField'
+  import GameField from './GameField'
 
   export default {
     components: {
