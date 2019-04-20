@@ -7,19 +7,27 @@
         :style="{ order: y * 4 + x }"
         :value="cell"
         :is-invisible="cell === 0"
+        @click.native="tryToMoveTileByPoint({ x, y })"
       />
     </template>
   </div>
 </template>
 <script>
   import Tile from './Tile'
+  import { mapGetters, mapActions } from 'vuex'
 
   export default {
-    data: () => ({
-      grid: [[1, 2, 3, 4], [5, 6, 7, 8], [9, 10, 11, 12], [13, 14, 15, 0]]
-    }),
     components: {
       Tile,
+    },
+    computed: {
+      ...mapGetters('gameField', ['grid'])
+    },
+    methods: {
+      ...mapActions('gameField', ['init', 'tryToMoveTileByPoint'])
+    },
+    beforeMount() {
+      this.init();
     }
   }
 </script>
