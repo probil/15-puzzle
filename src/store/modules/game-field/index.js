@@ -7,7 +7,7 @@ import {
   swapPoints,
   isSolved,
   shuffle,
-} from '../../../game-field/utils';
+} from './utils';
 import {
   GAME_FIELD_HEIGHT,
   GAME_FIELD_WIDTH,
