@@ -1,14 +1,18 @@
 <template>
   <div class="app">
-    <PlayBox/>
+    <PlayBox>
+      <GameField/>
+    </PlayBox>
   </div>
 </template>
 <script>
   import PlayBox from './PlayBox'
+  import GameField from './game-field/GameField'
 
   export default {
     components: {
       PlayBox,
+      GameField,
     }
   }
 </script>
