@@ -32,7 +32,7 @@ describe('generateField()', () => {
       expect(row).toHaveLength(4);
     });
   });
-  it('generates array filled with zeros', () => {
+  it('generates array filled with zeros by default', () => {
     expect(generateField({ width: 4, height: 3 })).toEqual([
       [0, 0, 0, 0],
       [0, 0, 0, 0],
@@ -41,6 +41,13 @@ describe('generateField()', () => {
     expect(generateField({ width: 2, height: 2 })).toEqual([
       [0, 0],
       [0, 0],
+    ]);
+  });
+  it('generates array filled with custom value', () => {
+    expect(generateField({ width: 4, height: 3, valueToFill: 'test' })).toEqual([
+      ['test', 'test', 'test', 'test'],
+      ['test', 'test', 'test', 'test'],
+      ['test', 'test', 'test', 'test'],
     ]);
   });
 });
@@ -119,6 +126,14 @@ describe('fillWithInitialData()', () => {
     },
   ])('correctly fills matrix with values', ({ initial, expected }) => {
     const actual = fillWithInitialData(initial);
+    expect(actual).toEqual(expected);
+  });
+
+  it('uses custom empty cell value when provided', () => {
+    const customEmptyCellValue = 'test';
+    const initial = [[0, 0], [0, 0]];
+    const expected = [[1, 2], [3, customEmptyCellValue]];
+    const actual = fillWithInitialData(initial, customEmptyCellValue);
     expect(actual).toEqual(expected);
   });
 });

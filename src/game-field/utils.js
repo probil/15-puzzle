@@ -1,3 +1,4 @@
+import { EMPTY_CELL_VALUE } from '../constants';
 /**
  * 2D array of positive numbers that represents game field
  * @typedef {(number[][])} GameField
@@ -13,20 +14,22 @@
 /**
  * @param {number} height
  * @param {number} width
+ * @param {number|string} valueToFill
  * @return {GameField}
  */
-export const generateField = ({ height, width }) => {
+export const generateField = ({ height, width, valueToFill = EMPTY_CELL_VALUE }) => {
   if (height < 2) throw new Error('Field height should be larger then 2 squares');
   if (width < 2) throw new Error('Field width should be larger then 2 squares');
   return Array(height).fill(0)
-    .map(() => Array(width).fill(0));
+    .map(() => Array(width).fill(valueToFill));
 };
 
 /**
  * @param {GameField} field
+ * @param {number|string} emptyCellValue
  * @returns {GameField}
  */
-export const fillWithInitialData = (field) => {
+export const fillWithInitialData = (field, emptyCellValue = EMPTY_CELL_VALUE) => {
   let startNumber = 0;
   const newField = field.map(row => (
     row.map(() => {
@@ -34,7 +37,7 @@ export const fillWithInitialData = (field) => {
       return startNumber;
     })
   ));
-  newField[field.length - 1][field[0].length - 1] = 0;
+  newField[field.length - 1][field[0].length - 1] = emptyCellValue;
   return newField;
 };
 
@@ -54,7 +57,7 @@ const deepCopy = value => JSON.parse(JSON.stringify(value));
 /**
  * TODO: Rewrite to generate only solvable fields
  * @param {GameField} field
- * @param {number=10} iterations
+ * @param {number=100} iterations
  * @returns {GameField}
  */
 export const shuffle = (field, iterations = 100) => {
