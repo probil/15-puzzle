@@ -24,10 +24,11 @@
       ...mapGetters('gameField', ['grid'])
     },
     methods: {
-      ...mapActions('gameField', ['init', 'tryToMoveTileByPoint'])
+      ...mapActions('gameField', ['init', 'shuffle', 'tryToMoveTileByPoint'])
     },
     beforeMount() {
       this.init();
+      this.shuffle();
     }
   }
 </script>

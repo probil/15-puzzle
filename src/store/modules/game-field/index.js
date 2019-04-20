@@ -45,6 +45,10 @@ const actions = {
     commit('reset');
   },
 
+  shuffle({ commit }) {
+    commit('shuffle');
+  },
+
   tryToMoveTileByPoint({ commit, state }, clickedPoint) {
     const emptyCellPoint = findPointByValue(EMPTY_CELL_VALUE, state.grid);
     const possibleMoves = getValidMovesForPoint(state.grid, emptyCellPoint);
