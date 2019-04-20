@@ -12,6 +12,14 @@ import { EMPTY_CELL_VALUE } from '../constants';
  */
 
 /**
+ * @typedef {Object} Point
+ * @property {number} x - Horizontal location
+ * @property {number} y - Vertical location
+ * @example
+ * { x: 1, y: 0}
+ */
+
+/**
  * @param {number} height
  * @param {number} width
  * @param {number|string} valueToFill
@@ -78,4 +86,20 @@ export const shuffle = (field, iterations = 100) => {
     intermediateField[secondRandomPointY][secondRandomPointX] = firstPointValue;
   }
   return intermediateField;
+};
+
+/**
+ * @param {number|EMPTY_CELL_VALUE} value
+ * @param {GameField} field
+ * @returns {?Point}
+ */
+export const findPointByValue = (value, field) => {
+  for (let y = 0; y < field.length; y += 1) {
+    for (let x = 0; x < field[y].length; x += 1) {
+      if (field[y][x] === value) {
+        return { x, y };
+      }
+    }
+  }
+  return undefined;
 };
