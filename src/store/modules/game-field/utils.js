@@ -1,4 +1,4 @@
-import { EMPTY_CELL_VALUE } from '../constants';
+import { EMPTY_CELL_VALUE } from '../../../constants';
 /**
  * 2D array of positive numbers that represents game field
  * @typedef {(number[][])} GameField
