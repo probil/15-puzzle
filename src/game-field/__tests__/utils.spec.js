@@ -1,4 +1,10 @@
-import { generateField, fillWithInitialData, shuffle } from '../utils';
+import {
+  generateField,
+  fillWithInitialData,
+  shuffle,
+  findPointByValue,
+  isSolved,
+} from '../utils';
 
 describe('generateField()', () => {
   it('is a function', () => {
@@ -165,5 +171,48 @@ describe('shuffle()', () => {
       shuffledField = shuffle(field);
     }).not.toThrow();
     expect(shuffledField).not.toEqual(field);
+  });
+});
+
+describe('findPointByValue()', () => {
+  it('is a function', () => {
+    expect(findPointByValue).toEqual(expect.any(Function));
+  });
+
+  it('returns value if point is inside field', () => {
+    const field = [[1, 2], [3, 0]];
+    expect(findPointByValue(1, field)).toEqual({ x: 0, y: 0 });
+    expect(findPointByValue(2, field)).toEqual({ x: 1, y: 0 });
+    expect(findPointByValue(0, field)).toEqual({ x: 1, y: 1 });
+  });
+
+  it('returns undefined when point is outside of the field', () => {
+    const field = [[1, 2], [3, 0]];
+    expect(findPointByValue(-1, field)).toBeUndefined();
+    expect(findPointByValue(4, field)).toBeUndefined();
+  });
+});
+
+describe('isSolved()', () => {
+  it('is a function', () => {
+    expect(isSolved).toEqual(expect.any(Function));
+  });
+  it('returns true for solved field (without custom empty cell value)', () => {
+    const field = [[1, 2], [3, 0]];
+    expect(isSolved(field)).toBe(true);
+  });
+  it('returns true for solved field (with custom empty cell value)', () => {
+    const emptyCellValue = 'test';
+    const field = [[1, 2], [3, emptyCellValue]];
+    expect(isSolved(field, emptyCellValue)).toBe(true);
+  });
+  it('returns false for incorrectly solved field (without custom empty cell value)', () => {
+    const field = [[2, 1], [3, 0]];
+    expect(isSolved(field)).toBe(false);
+  });
+  it('returns false for incorrectly solved field (with custom empty cell value)', () => {
+    const emptyCellValue = 'test';
+    const field = [[1, 2], [emptyCellValue, 3]];
+    expect(isSolved(field)).toBe(false);
   });
 });

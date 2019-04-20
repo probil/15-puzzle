@@ -20,6 +20,53 @@ import { EMPTY_CELL_VALUE } from '../constants';
  */
 
 /**
+ * @param {GameField} field
+ * @return {number}
+ */
+const getFieldHeight = field => field.length;
+
+/**
+ * @param {GameField} field
+ * @return {number}
+ */
+const getFieldWidth = field => field[0].length;
+
+/**
+ * @param {GameField} field
+ * @return {Point}
+ */
+const getInitialEmptyCellPoint = field => ({
+  x: getFieldWidth(field) - 1,
+  y: getFieldHeight(field) - 1,
+});
+
+/**
+ * @param {*} value
+ * @return {*}
+ */
+const deepCopy = value => JSON.parse(JSON.stringify(value));
+
+/**
+ * @param {GameField} field
+ * @param {Point} point
+ * @param {number|string} value
+ * @return {GameField}
+ */
+const setPointValue = (field, point, value) => {
+  const newField = deepCopy(field);
+  newField[point.y][point.x] = value;
+  return newField;
+};
+
+/**
+ * Generates random int 0..to (inclusive)
+ * @param to - max value
+ * @return {number}
+ */
+const randomInt = to => Math.floor(Math.random() * to);
+
+
+/**
  * @param {number} height
  * @param {number} width
  * @param {number|string} valueToFill
@@ -45,22 +92,9 @@ export const fillWithInitialData = (field, emptyCellValue = EMPTY_CELL_VALUE) =>
       return startNumber;
     })
   ));
-  newField[field.length - 1][field[0].length - 1] = emptyCellValue;
-  return newField;
+  const emptyCellPoint = getInitialEmptyCellPoint(newField);
+  return setPointValue(newField, emptyCellPoint, emptyCellValue);
 };
-
-/**
- * Generates random int 0..to (inclusive)
- * @param to - max value
- * @return {number}
- */
-const randomInt = to => Math.floor(Math.random() * to);
-
-/**
- * @param {*} value
- * @return {*}
- */
-const deepCopy = value => JSON.parse(JSON.stringify(value));
 
 /**
  * TODO: Rewrite to generate only solvable fields
@@ -71,8 +105,8 @@ const deepCopy = value => JSON.parse(JSON.stringify(value));
 export const shuffle = (field, iterations = 100) => {
   /** @type {GameField} */
   const intermediateField = deepCopy(field);
-  const fieldHeight = field.length;
-  const fieldWidth = field[0].length;
+  const fieldHeight = getFieldHeight(field);
+  const fieldWidth = getFieldWidth(field);
   for (let i = 0; i < iterations; i += 1) {
     const firstRandomPointX = randomInt(fieldWidth);
     const firstRandomPointY = randomInt(fieldHeight);
@@ -102,4 +136,24 @@ export const findPointByValue = (value, field) => {
     }
   }
   return undefined;
+};
+
+/**
+ * @param {GameField} field
+ * @param {string|number} emptyCellValue
+ * @return {boolean}
+ */
+export const isSolved = (field, emptyCellValue = EMPTY_CELL_VALUE) => {
+  let desiredValue = 1;
+  const emptyCellPoint = getInitialEmptyCellPoint(field);
+  const isEmptyCellPoint = point => point.x === emptyCellPoint.x && point.y === emptyCellPoint.y;
+  for (let y = 0; y < field.length; y += 1) {
+    for (let x = 0; x < field[y].length; x += 1) {
+      const currentPoint = { x, y };
+      const valueToCompare = isEmptyCellPoint(currentPoint) ? emptyCellValue : desiredValue;
+      if (field[y][x] !== valueToCompare) return false;
+      desiredValue += 1;
+    }
+  }
+  return true;
 };
