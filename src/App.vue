@@ -1,8 +1,17 @@
 <template>
   <div class="app">
-    Game field
+    <PlayBox/>
   </div>
 </template>
+<script>
+  import PlayBox from './PlayBox'
+
+  export default {
+    components: {
+      PlayBox,
+    }
+  }
+</script>
 <style lang="stylus">
   body
     margin 0
