@@ -28,11 +28,6 @@
     box-sizing border-box
 
     &__grid
-      display: flex;
-      justify-content space-between
-      align-content space-between
-      flex-wrap wrap
-      box-sizing border-box
       height 100%
       width 100%
 
