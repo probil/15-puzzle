@@ -6,6 +6,7 @@ import {
   isSolved,
   swapPoints,
   getValidMovesForPoint,
+  isPointsAreEqual,
 } from '../utils';
 
 describe('generateField()', () => {
@@ -280,5 +281,23 @@ describe('getValidMovesForPoint()', () => {
     const expected = [{ x: 2, y: 1 }, { x: 0, y: 1 }, { x: 1, y: 2 }, { x: 1, y: 0 }];
     const actual = getValidMovesForPoint(field, { x: 1, y: 1 });
     expect(actual).toEqual(expected);
+  });
+});
+
+describe('isPointsAreEqual()', () => {
+  it('is a function', () => {
+    expect(isPointsAreEqual).toEqual(expect.any(Function));
+  });
+  it('returns true for equal points', () => {
+    const point1 = { x: 1, y: 15 };
+    const point2 = { x: 1, y: 15 };
+    expect(isPointsAreEqual(point1, point2)).toBe(true);
+  });
+  it('returns false for non-equal points', () => {
+    const point1 = { x: 1, y: 15 };
+    const point2 = { x: 2, y: 15 };
+    const point3 = { x: 1, y: 16 };
+    expect(isPointsAreEqual(point1, point2)).toBe(false);
+    expect(isPointsAreEqual(point1, point3)).toBe(false);
   });
 });
