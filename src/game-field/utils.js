@@ -59,6 +59,13 @@ const setPointValue = (field, point, value) => {
 };
 
 /**
+ * @param {GameField} field
+ * @param {Point} point
+ * @return {number|string}
+ */
+const getPointValue = (field, point) => field[point.y][point.x];
+
+/**
  * Generates random int 0..to (inclusive)
  * @param to - max value
  * @return {number}
@@ -156,4 +163,17 @@ export const isSolved = (field, emptyCellValue = EMPTY_CELL_VALUE) => {
     }
   }
   return true;
+};
+
+/**
+ * @param {Point} point1
+ * @param {Point} point2
+ * @param {GameField} field
+ * @return {GameField}
+ */
+export const swapPoints = (point1, point2, field) => {
+  const point1Value = getPointValue(field, point1);
+  const point2Value = getPointValue(field, point2);
+  const newField = setPointValue(field, point1, point2Value);
+  return setPointValue(newField, point2, point1Value);
 };

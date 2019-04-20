@@ -4,6 +4,7 @@ import {
   shuffle,
   findPointByValue,
   isSolved,
+  swapPoints,
 } from '../utils';
 
 describe('generateField()', () => {
@@ -214,5 +215,39 @@ describe('isSolved()', () => {
     const emptyCellValue = 'test';
     const field = [[1, 2], [emptyCellValue, 3]];
     expect(isSolved(field)).toBe(false);
+  });
+});
+
+describe('swapPoints()', () => {
+  it('is a function', () => {
+    expect(swapPoints).toEqual(expect.any(Function));
+  });
+  it('swaps point values', () => {
+    const initial = [[1, 2], [3, 0]];
+    const expected = [[0, 2], [3, 1]];
+    const point1 = { x: 0, y: 0 };
+    const point2 = { x: 1, y: 1 };
+    const actual = swapPoints(point1, point2, initial);
+    expect(actual).toEqual(expected);
+  });
+  it('throws an error when first point is outside of the field', () => {
+    const initial = [[1, 2], [3, 0]];
+    const point1 = { x: 3, y: 3 };
+    const point2 = { x: 1, y: 1 };
+    expect(() => swapPoints(point1, point2, initial)).toThrow();
+  });
+  it('throws an error when second point is outside of the field', () => {
+    const initial = [[1, 2], [3, 0]];
+    const point1 = { x: 0, y: 0 };
+    const point2 = { x: 4, y: 4 };
+    expect(() => swapPoints(point1, point2, initial)).toThrow();
+  });
+  it('does nothing when first and second point are equal', () => {
+    const initial = [[1, 2], [3, 0]];
+    const expected = [[1, 2], [3, 0]];
+    const point1 = { x: 1, y: 0 };
+    const point2 = { x: 1, y: 0 };
+    const actual = swapPoints(point1, point2, initial);
+    expect(actual).toEqual(expected);
   });
 });
