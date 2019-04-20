@@ -5,6 +5,7 @@ import {
   findPointByValue,
   isSolved,
   swapPoints,
+  getValidMovesForPoint,
 } from '../utils';
 
 describe('generateField()', () => {
@@ -248,6 +249,36 @@ describe('swapPoints()', () => {
     const point1 = { x: 1, y: 0 };
     const point2 = { x: 1, y: 0 };
     const actual = swapPoints(point1, point2, initial);
+    expect(actual).toEqual(expected);
+  });
+});
+
+describe('getValidMovesForPoint()', () => {
+  it('is a function', () => {
+    expect(getValidMovesForPoint).toEqual(expect.any(Function));
+  });
+  it('returns two points for upper left corner and 2x2 field', () => {
+    const field = [[1, 2], [3, 0]];
+    const expected = [{ x: 1, y: 0 }, { x: 0, y: 1 }];
+    const actual = getValidMovesForPoint(field, { x: 0, y: 0 });
+    expect(actual).toEqual(expected);
+  });
+  it('returns two points for lower right corner and 2x2 field', () => {
+    const field = [[1, 2], [3, 0]];
+    const expected = [{ x: 0, y: 1 }, { x: 1, y: 0 }];
+    const actual = getValidMovesForPoint(field, { x: 1, y: 1 });
+    expect(actual).toEqual(expected);
+  });
+  it('returns empty array for 1x1 field', () => {
+    const field = [[0]];
+    const expected = [];
+    const actual = getValidMovesForPoint(field, { x: 0, y: 0 });
+    expect(actual).toEqual(expected);
+  });
+  it('returns four points for center of 3x3 field', () => {
+    const field = [[1, 2, 3], [4, 5, 6], [7, 8, 0]];
+    const expected = [{ x: 2, y: 1 }, { x: 0, y: 1 }, { x: 1, y: 2 }, { x: 1, y: 0 }];
+    const actual = getValidMovesForPoint(field, { x: 1, y: 1 });
     expect(actual).toEqual(expected);
   });
 });

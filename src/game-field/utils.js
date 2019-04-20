@@ -177,3 +177,30 @@ export const swapPoints = (point1, point2, field) => {
   const newField = setPointValue(field, point1, point2Value);
   return setPointValue(newField, point2, point1Value);
 };
+
+/**
+ * @param {Point} point
+ * @param {GameField} field
+ * @return {boolean}
+ */
+const isPointInField = (field, point) => {
+  const fieldHeight = getFieldHeight(field);
+  const fieldWidth = getFieldWidth(field);
+  const { x, y } = point;
+  return x >= 0 && y >= 0 && x < fieldWidth && y < fieldHeight;
+};
+
+/**
+ * @param {GameField} field
+ * @param {Point} point
+ * @return {Point[]}
+ */
+export const getValidMovesForPoint = (field, point) => {
+  const isPointInCurrentField = isPointInField.bind(null, field);
+  return [
+    { ...point, x: point.x + 1 },
+    { ...point, x: point.x - 1 },
+    { ...point, y: point.y + 1 },
+    { ...point, y: point.y - 1 },
+  ].filter(isPointInCurrentField);
+};
