@@ -4,6 +4,7 @@ import Vuex from 'vuex';
 import gameField from './modules/game-field';
 import moves from './modules/moves';
 import game from './modules/game';
+import timer from './modules/timer';
 
 Vue.use(Vuex);
 
@@ -13,5 +14,6 @@ export default new Vuex.Store({
     gameField,
     moves,
     game,
+    timer,
   },
 });
