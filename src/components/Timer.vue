@@ -2,21 +2,7 @@
   <div class="timer">Time: {{ time | toMMSS }}</div>
 </template>
 <script>
-  /**
-   * @param {Number} number
-   * @returns {String}
-   */
-  const pad = number => (`0${number}`).slice(-2);
-
-  /**
-   * @param {Number} value
-   * @return {string}
-   */
-  const toMMSS = value =>  {
-    const minutes = Math.trunc(value / 60);
-    const seconds = value % 60;
-    return `${pad(minutes)}:${pad(seconds)}`;
-  };
+  import { toMMSS } from '../filters'
 
   export default {
     $interval: null,

@@ -1,19 +1,32 @@
 <template>
   <div class="app">
     <div class="app__container">
-      <InfoBar>
+      <InfoBar v-show="isGameStarted && !isGameFinished">
         <Moves :value="moves" slot="left"></Moves>
         <Timer
           slot="right"
-          :is-running="isGameStarted"
+          :is-running="isGameStarted && !isGameFinished"
           :started-at="startedAt"
         ></Timer>
       </InfoBar>
       <PlayBox>
         <GameField
+          v-if="!isGameFinished"
           :grid="grid"
           @tile-clicked="moveTileByPoint"
         ></GameField>
+        <template slot="overlay">
+          <OverlayStartTheGame
+            v-if="!isGameStarted"
+            @start-game="startNewGame"
+          ></OverlayStartTheGame>
+          <OverlayYouWin
+            v-if="isGameFinished"
+            @restart="startNewGame"
+            :total-moves="moves"
+            :total-time="totalTime"
+          ></OverlayYouWin>
+        </template>
       </PlayBox>
     </div>
   </div>
@@ -25,6 +38,8 @@
   import Moves from './Moves'
   import InfoBar from './InfoBar'
   import Timer from './Timer'
+  import OverlayStartTheGame from './OverlayStartTheGame'
+  import OverlayYouWin from './OverlayYouWin'
 
   export default {
     components: {
@@ -33,19 +48,18 @@
       Moves,
       InfoBar,
       Timer,
+      OverlayStartTheGame,
+      OverlayYouWin,
     },
     computed: {
-      ...mapGetters(['isGameStarted']),
+      ...mapGetters(['isGameStarted', 'isGameFinished']),
       ...mapGetters('gameField', ['grid']),
       ...mapGetters('moves', ['moves']),
-      ...mapGetters('timer', ['startedAt']),
+      ...mapGetters('timer', ['startedAt', 'totalTime']),
     },
     methods: {
       ...mapActions(['startNewGame', 'moveTileByPoint']),
     },
-    beforeMount() {
-      this.startNewGame();
-    }
   }
 </script>
 <style lang="stylus">
