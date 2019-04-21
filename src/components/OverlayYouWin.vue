@@ -4,7 +4,7 @@
       <h2 class="overlay-you-win__heading">Bravo! You win!</h2>
       <div class="overlay-you-win__stats">
         <span>
-          Time: {{ totalTime }}
+          Time: {{ totalTime | toMMSS }}
         </span>
         <span>
           Moves: {{ totalMoves }}
@@ -16,6 +16,7 @@
 </template>
 <script>
   import OverlayBase from './OverlayBase'
+  import { toMMSS } from '../filters'
 
   export default {
     props: {
@@ -35,6 +36,9 @@
       restart() {
         return this.$emit('restart');
       }
+    },
+    filters: {
+      toMMSS,
     }
   }
 </script>
