@@ -19,4 +19,5 @@
 
     &__right
       flex-basis 50%
+      text-align right
 </style>
