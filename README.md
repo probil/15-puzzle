@@ -28,7 +28,7 @@ npm run build
 npm run test
 
 # run unit in watch mode
-npm run test
+npm run test:watch
 
 # run unit in coverage mode
 npm run test:cov
@@ -37,5 +37,5 @@ npm run test:cov
 npm run lint
 
 # check code style and fix potentially fixable issues
-npm run lint
+npm run lint:fix
 ```
