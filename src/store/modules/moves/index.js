@@ -3,6 +3,10 @@ const state = {
   value: 0,
 };
 
+const getters = {
+  moves: state => state.value,
+};
+
 const mutations = {
   increment(state) {
     state.value += 1;
@@ -20,6 +24,7 @@ const actions = {
 export default {
   namespaced: true,
   state,
+  getters,
   mutations,
   actions,
 };
