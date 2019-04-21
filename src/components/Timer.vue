@@ -18,6 +18,7 @@ export default {
     },
     startedAt: {
       type: String,
+      default: () => new Date().toISOString(),
     },
   },
   data: () => ({
