@@ -1,3 +1,19 @@
 {
-  "extends": ["airbnb-base", "plugin:jest/recommended"]
+  "extends": [
+    "airbnb-base",
+    "plugin:jest/recommended",
+    "plugin:vue/recommended"
+  ],
+  "rules": {
+    // parcel+vue does't support self-closing for now
+    "vue/html-self-closing": ["error", {
+      "html": {
+        "void": "never",
+        "normal": "never",
+        "component": "never"
+      },
+      "svg": "always",
+      "math": "always"
+    }]
+  }
 }

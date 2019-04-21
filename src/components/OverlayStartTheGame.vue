@@ -1,21 +1,27 @@
 <template>
   <OverlayBase>
-    Press <button class="btn-start" @click="startNewGame">Play</button> to start
+    Press
+    <button
+      class="btn-start"
+      @click="startNewGame"
+    >
+      Play
+    </button> to start
   </OverlayBase>
 </template>
 <script>
-  import OverlayBase from './OverlayBase'
+import OverlayBase from './OverlayBase.vue';
 
-  export default {
-    components: {
-      OverlayBase,
+export default {
+  components: {
+    OverlayBase,
+  },
+  methods: {
+    startNewGame() {
+      return this.$emit('start-game');
     },
-    methods: {
-      startNewGame() {
-        return this.$emit('start-game');
-      }
-    }
-  }
+  },
+};
 </script>
 <style lang="stylus">
   .btn-start

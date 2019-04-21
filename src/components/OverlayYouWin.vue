@@ -1,7 +1,9 @@
 <template>
   <OverlayBase>
     <div class="overlay-you-win">
-      <h2 class="overlay-you-win__heading">Bravo! You win!</h2>
+      <h2 class="overlay-you-win__heading">
+        Bravo! You win!
+      </h2>
       <div class="overlay-you-win__stats">
         <span>
           Time: {{ totalTime | toMMSS }}
@@ -10,37 +12,42 @@
           Moves: {{ totalMoves }}
         </span>
       </div>
-      <button class="overlay-you-win__btn-restart" @click="restart">Restart</button>
+      <button
+        class="overlay-you-win__btn-restart"
+        @click="restart"
+      >
+        Restart
+      </button>
     </div>
   </OverlayBase>
 </template>
 <script>
-  import OverlayBase from './OverlayBase'
-  import { toMMSS } from '../filters'
+import OverlayBase from './OverlayBase.vue';
+import { toMMSS } from '../filters';
 
-  export default {
-    props: {
-      totalMoves: {
-        type: Number,
-        default: 0,
-      },
-      totalTime: {
-        type: Number,
-        default: 0,
-      }
+export default {
+  components: {
+    OverlayBase,
+  },
+  filters: {
+    toMMSS,
+  },
+  props: {
+    totalMoves: {
+      type: Number,
+      default: 0,
     },
-    components: {
-      OverlayBase,
+    totalTime: {
+      type: Number,
+      default: 0,
     },
-    methods: {
-      restart() {
-        return this.$emit('restart');
-      }
+  },
+  methods: {
+    restart() {
+      return this.$emit('restart');
     },
-    filters: {
-      toMMSS,
-    }
-  }
+  },
+};
 </script>
 <style lang="stylus">
   .overlay-you-win
@@ -50,7 +57,7 @@
       line-height 1
 
     &__stats
-      margin-top 25px
+      margin 25px auto 0
       width 330px
       display flex
       justify-content space-between
