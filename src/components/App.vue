@@ -14,6 +14,11 @@
           :grid="grid"
           @tile-clicked="moveTileByPoint"
         ></GameField>
+        <OverlayStartTheGame
+          slot="overlay"
+          v-if="!isGameStarted"
+          @start-game="startNewGame"
+        ></OverlayStartTheGame>
       </PlayBox>
     </div>
   </div>
@@ -25,6 +30,7 @@
   import Moves from './Moves'
   import InfoBar from './InfoBar'
   import Timer from './Timer'
+  import OverlayStartTheGame from './OverlayStartTheGame'
 
   export default {
     components: {
@@ -33,6 +39,7 @@
       Moves,
       InfoBar,
       Timer,
+      OverlayStartTheGame,
     },
     computed: {
       ...mapGetters(['isGameStarted']),
@@ -43,9 +50,6 @@
     methods: {
       ...mapActions(['startNewGame', 'moveTileByPoint']),
     },
-    beforeMount() {
-      this.startNewGame();
-    }
   }
 </script>
 <style lang="stylus">
@@ -60,4 +64,10 @@
 
     &__container
       margin 1rem
+
+  .btn-start
+    font-size 2rem
+    border-radius 0.5rem
+    margin-left 10px
+    margin-right 10px
 </style>
