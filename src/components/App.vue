@@ -66,6 +66,7 @@
   body
     margin 0
     font-family: 'IBM Plex Mono', monospace;
+    background: embedurl("../assets/bg-pattern.svg"), #e5e5e5
 
   .app
     min-height 100vh
