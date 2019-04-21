@@ -65,6 +65,7 @@
 <style lang="stylus">
   body
     margin 0
+    font-family: 'IBM Plex Mono', monospace;
 
   .app
     min-height 100vh
