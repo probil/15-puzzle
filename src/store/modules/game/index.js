@@ -21,6 +21,7 @@ const actions = {
     dispatch('gameField/reset');
     dispatch('gameField/shuffle');
     dispatch('moves/reset');
+    dispatch('timer/start');
     commit('startNewGame');
   },
   moveTileByPoint({ dispatch }, point) {
