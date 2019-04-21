@@ -10,6 +10,7 @@
         :key="`underlay-tile-${n}`"
       ></div>
     </div>
+    <slot name="overlay"></slot>
   </div>
 </template>
 <style lang="stylus">
