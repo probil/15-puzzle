@@ -24,9 +24,11 @@ const actions = {
     commit('startNewGame');
   },
   moveTileByPoint({ dispatch }, point) {
-    const isMoved = dispatch('gameField/tryToMoveTileByPoint', point);
-    if (!isMoved) return;
-    dispatch('moves/increment');
+    dispatch('gameField/tryToMoveTileByPoint', point)
+      .then((isMoved) => {
+        if (!isMoved) return;
+        dispatch('moves/increment');
+      });
   },
 };
 

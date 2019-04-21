@@ -18,7 +18,6 @@
   $tile-size=100px
 
   .play-box
-    margin 1rem
     background-color rgba(0, 151, 167, 0.29)
     height $field-height
     width $field-width
