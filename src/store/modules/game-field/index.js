@@ -41,13 +41,8 @@ const mutations = {
 };
 
 const actions = {
-  init({ commit }) {
-    commit('reset');
-  },
-
-  shuffle({ commit }) {
-    commit('shuffle');
-  },
+  reset: ({ commit }) => commit('reset'),
+  shuffle: ({ commit }) => commit('shuffle'),
 
   tryToMoveTileByPoint({ commit, state }, clickedPoint) {
     const emptyCellPoint = findPointByValue(EMPTY_CELL_VALUE, state.grid);
