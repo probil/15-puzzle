@@ -3,10 +3,10 @@ import {
   generateField,
   fillWithInitialData,
   findPointByValue,
-  getValidMovesForPoint,
   swapPoints,
   isSolved,
   shuffle,
+  isValidMove,
 } from './utils';
 import {
   GAME_FIELD_HEIGHT,
@@ -45,11 +45,8 @@ const actions = {
   shuffle: ({ commit }) => commit('shuffle'),
 
   tryToMoveTileByPoint({ commit, state }, clickedPoint) {
+    if (!isValidMove(state.grid, clickedPoint)) return false;
     const emptyCellPoint = findPointByValue(EMPTY_CELL_VALUE, state.grid);
-    const possibleMoves = getValidMovesForPoint(state.grid, emptyCellPoint);
-    const isPossibleMove = possibleMoves
-      .some(move => (move.x === clickedPoint.x && move.y === clickedPoint.y));
-    if (!isPossibleMove) return false;
     commit('swapPoints', { point1: emptyCellPoint, point2: clickedPoint });
     return true;
   },
