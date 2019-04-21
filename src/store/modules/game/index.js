@@ -18,7 +18,8 @@ const mutations = {
 
 const actions = {
   startNewGame({ commit, dispatch }) {
-    dispatch('gameField/init');
+    dispatch('gameField/reset');
+    dispatch('gameField/shuffle');
     dispatch('moves/reset');
     commit('startNewGame');
   },
