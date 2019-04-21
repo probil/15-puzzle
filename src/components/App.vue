@@ -1,7 +1,9 @@
 <template>
   <div class="app">
     <div class="app__container">
-      <Moves :value="moves"></Moves>
+      <InfoBar>
+        <Moves :value="moves" slot="left"></Moves>
+      </InfoBar>
       <PlayBox>
         <GameField
           :grid="grid"
@@ -16,12 +18,14 @@
   import PlayBox from './PlayBox'
   import GameField from './GameField'
   import Moves from './Moves'
+  import InfoBar from './InfoBar'
 
   export default {
     components: {
       PlayBox,
       GameField,
       Moves,
+      InfoBar,
     },
     computed: {
       ...mapGetters(['isGameStarted']),
