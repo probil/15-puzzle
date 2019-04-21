@@ -214,12 +214,11 @@ export const isPointsAreEqual = (point1, point2) => point1.x === point2.x && poi
 
 /**
  * @param {GameField} field
- * @param {Point} point
- * @param {number|string} emptyCellValue
+ * @param {Point} point1
+ * @param {Point} point2
  * @return {boolean}
  */
-export const isValidMove = (field, point, emptyCellValue = EMPTY_CELL_VALUE) => {
-  const emptyCellPoint = findPointByValue(emptyCellValue, field);
-  const possibleMoves = getValidMovesForPoint(field, emptyCellPoint);
-  return possibleMoves.some(isPointsAreEqual.bind(null, point));
+export const isSwapPossible = (field, point1, point2) => {
+  const possibleMoves = getValidMovesForPoint(field, point2);
+  return possibleMoves.some(isPointsAreEqual.bind(null, point1));
 };
