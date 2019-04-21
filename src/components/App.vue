@@ -1,7 +1,7 @@
 <template>
   <div class="app">
     <div class="app__container">
-      <InfoBar>
+      <InfoBar v-show="isGameStarted && !isGameFinished">
         <Moves :value="moves" slot="left"></Moves>
         <Timer
           slot="right"
