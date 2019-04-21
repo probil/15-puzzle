@@ -20,7 +20,7 @@ const mutations = {
 
 const getters = {
   startedAt: state => state.startedAt,
-  totalTime: state => differenceInSeconds(state.finishedAt, state.startedAt),
+  totalTime: state => differenceInSeconds(state.startedAt, state.finishedAt),
 };
 
 const actions = {
