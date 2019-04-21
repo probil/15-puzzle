@@ -13,14 +13,12 @@
   </div>
 </template>
 <style lang="stylus">
-  $field-height=500px
-  $field-width=500px
-  $tile-size=100px
+  @import "../_variables.styl"
 
   .play-box
     background-color rgba(0, 151, 167, 0.29)
-    height $field-height
-    width $field-width
+    height $playbox-height
+    width $playbox-width
     border-radius 1rem
     padding 1.5rem
     position relative
@@ -34,8 +32,8 @@
       position absolute
       top 0
       left 0
-      width $field-width
-      height $field-height
+      width $playbox-width
+      height $playbox-height
       padding 1.5rem
       display: flex;
       justify-content space-between
