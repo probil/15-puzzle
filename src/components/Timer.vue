@@ -1,43 +1,45 @@
 <template>
-  <div class="timer">Time: {{ time | toMMSS }}</div>
+  <div class="timer">
+    Time: {{ time | toMMSS }}
+  </div>
 </template>
 <script>
-  import { toMMSS } from '../filters'
+import { toMMSS } from '../filters';
 
-  export default {
-    $interval: null,
-    data: () => ({
-      time: 0
-    }),
-    props: {
-      isRunning: {
-        type: Boolean,
-        default: false,
-      },
-      startedAt: {
-        type: String,
-      }
+export default {
+  $interval: null,
+  filters: {
+    toMMSS,
+  },
+  props: {
+    isRunning: {
+      type: Boolean,
+      default: false,
     },
-    computed: {
-      startedAtDate() {
-        return new Date(this.startedAt);
-      },
+    startedAt: {
+      type: String,
     },
-    methods: {
-      updateTime() {
-        if (!this.isRunning) return;
-        const diff = +new Date() - +this.startedAtDate;
-        this.time = Math.round(diff / 1000);
-      }
+  },
+  data: () => ({
+    time: 0,
+  }),
+  computed: {
+    startedAtDate() {
+      return new Date(this.startedAt);
     },
-    filters: {
-      toMMSS
+  },
+  mounted() {
+    this.$interval = setInterval(this.updateTime, 1000);
+  },
+  beforeDestroy() {
+    clearInterval(this.$interval);
+  },
+  methods: {
+    updateTime() {
+      if (!this.isRunning) return;
+      const diff = +new Date() - +this.startedAtDate;
+      this.time = Math.round(diff / 1000);
     },
-    mounted() {
-      this.$interval = setInterval(this.updateTime, 1000);
-    },
-    beforeDestroy() {
-      clearInterval(this.$interval)
-    }
-  }
+  },
+};
 </script>

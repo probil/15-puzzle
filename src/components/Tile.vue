@@ -2,20 +2,22 @@
   <div
     class="tile"
     :class="{ 'tile--invisible': isInvisible }"
-  >{{ value }}</div>
+  >
+    {{ value }}
+  </div>
 </template>
 <script>
-  export default {
-    props: {
-      value: {
-        type: [String, Number],
-      },
-      isInvisible: {
-        type: Boolean,
-        default: false
-      }
-    }
-  }
+export default {
+  props: {
+    value: {
+      type: [String, Number],
+    },
+    isInvisible: {
+      type: Boolean,
+      default: false,
+    },
+  },
+};
 </script>
 <style lang="stylus">
   .tile

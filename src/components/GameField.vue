@@ -8,29 +8,29 @@
         :value="cell"
         :is-invisible="cell === 0"
         @click.native="handleClick({ x, y })"
-      />
+      ></Tile>
     </template>
   </div>
 </template>
 <script>
-  import Tile from './Tile'
+import Tile from './Tile.vue';
 
-  export default {
-    components: {
-      Tile,
+export default {
+  components: {
+    Tile,
+  },
+  props: {
+    grid: {
+      type: Array,
+      required: true,
     },
-    props: {
-      grid: {
-        type: Array,
-        required: true
-      }
+  },
+  methods: {
+    handleClick(point) {
+      this.$emit('tile-clicked', point);
     },
-    methods: {
-      handleClick(point) {
-        this.$emit('tile-clicked', point)
-      }
-    },
-  }
+  },
+};
 </script>
 <style lang="stylus">
   .game-field

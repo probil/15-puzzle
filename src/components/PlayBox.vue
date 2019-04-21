@@ -1,13 +1,13 @@
 <template>
   <div class="play-box">
     <div class="play-box__grid">
-      <slot/>
+      <slot></slot>
     </div>
     <div class="play-box__underlay">
       <div
-        class="play-box__underlay-tile"
         v-for="n in 16"
         :key="`underlay-tile-${n}`"
+        class="play-box__underlay-tile"
       ></div>
     </div>
     <slot name="overlay"></slot>

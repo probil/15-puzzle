@@ -2,7 +2,10 @@
   <div class="app">
     <div class="app__container">
       <InfoBar v-show="isGameStarted && !isGameFinished">
-        <Moves :value="moves" slot="left"></Moves>
+        <Moves
+          slot="left"
+          :value="moves"
+        ></Moves>
         <Timer
           slot="right"
           :is-running="isGameStarted && !isGameFinished"
@@ -22,9 +25,9 @@
           ></OverlayStartTheGame>
           <OverlayYouWin
             v-if="isGameFinished"
-            @restart="startNewGame"
             :total-moves="moves"
             :total-time="totalTime"
+            @restart="startNewGame"
           ></OverlayYouWin>
         </template>
       </PlayBox>
@@ -32,35 +35,35 @@
   </div>
 </template>
 <script>
-  import { mapGetters, mapActions } from 'vuex'
-  import PlayBox from './PlayBox'
-  import GameField from './GameField'
-  import Moves from './Moves'
-  import InfoBar from './InfoBar'
-  import Timer from './Timer'
-  import OverlayStartTheGame from './OverlayStartTheGame'
-  import OverlayYouWin from './OverlayYouWin'
+import { mapGetters, mapActions } from 'vuex';
+import PlayBox from './PlayBox.vue';
+import GameField from './GameField.vue';
+import Moves from './Moves.vue';
+import InfoBar from './InfoBar.vue';
+import Timer from './Timer.vue';
+import OverlayStartTheGame from './OverlayStartTheGame.vue';
+import OverlayYouWin from './OverlayYouWin.vue';
 
-  export default {
-    components: {
-      PlayBox,
-      GameField,
-      Moves,
-      InfoBar,
-      Timer,
-      OverlayStartTheGame,
-      OverlayYouWin,
-    },
-    computed: {
-      ...mapGetters(['isGameStarted', 'isGameFinished']),
-      ...mapGetters('gameField', ['grid']),
-      ...mapGetters('moves', ['moves']),
-      ...mapGetters('timer', ['startedAt', 'totalTime']),
-    },
-    methods: {
-      ...mapActions(['startNewGame', 'moveTileByPoint']),
-    },
-  }
+export default {
+  components: {
+    PlayBox,
+    GameField,
+    Moves,
+    InfoBar,
+    Timer,
+    OverlayStartTheGame,
+    OverlayYouWin,
+  },
+  computed: {
+    ...mapGetters(['isGameStarted', 'isGameFinished']),
+    ...mapGetters('gameField', ['grid']),
+    ...mapGetters('moves', ['moves']),
+    ...mapGetters('timer', ['startedAt', 'totalTime']),
+  },
+  methods: {
+    ...mapActions(['startNewGame', 'moveTileByPoint']),
+  },
+};
 </script>
 <style lang="stylus">
   body

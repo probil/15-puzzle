@@ -1,6 +1,6 @@
 <template>
   <div class="overlay-base">
-    <slot />
+    <slot></slot>
   </div>
 </template>
 <style lang="stylus">
