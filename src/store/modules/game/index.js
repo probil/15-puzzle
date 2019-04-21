@@ -38,7 +38,6 @@ const actions = {
   },
   checkIsReadyToFinish({ rootGetters, dispatch }) {
     const isSolved = rootGetters['gameField/isSolved'];
-    console.log('isSolved', isSolved);
     if (!isSolved) return;
     dispatch('finishTheGame');
   },
