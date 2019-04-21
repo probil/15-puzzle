@@ -64,10 +64,4 @@
 
     &__container
       margin 1rem
-
-  .btn-start
-    font-size 2rem
-    border-radius 0.5rem
-    margin-left 10px
-    margin-right 10px
 </style>
