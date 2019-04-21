@@ -204,3 +204,21 @@ export const getValidMovesForPoint = (field, point) => {
     { ...point, y: point.y - 1 },
   ].filter(isPointInCurrentField);
 };
+
+/**
+ * @param {Point} point1
+ * @param {Point} point2
+ * @return {boolean}
+ */
+export const isPointsAreEqual = (point1, point2) => point1.x === point2.x && point1.y === point2.y;
+
+/**
+ * @param {GameField} field
+ * @param {Point} point1
+ * @param {Point} point2
+ * @return {boolean}
+ */
+export const isSwapPossible = (field, point1, point2) => {
+  const possibleMoves = getValidMovesForPoint(field, point2);
+  return possibleMoves.some(isPointsAreEqual.bind(null, point1));
+};

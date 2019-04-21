@@ -6,6 +6,8 @@ import {
   isSolved,
   swapPoints,
   getValidMovesForPoint,
+  isPointsAreEqual,
+  isSwapPossible,
 } from '../utils';
 
 describe('generateField()', () => {
@@ -280,5 +282,51 @@ describe('getValidMovesForPoint()', () => {
     const expected = [{ x: 2, y: 1 }, { x: 0, y: 1 }, { x: 1, y: 2 }, { x: 1, y: 0 }];
     const actual = getValidMovesForPoint(field, { x: 1, y: 1 });
     expect(actual).toEqual(expected);
+  });
+});
+
+describe('isPointsAreEqual()', () => {
+  it('is a function', () => {
+    expect(isPointsAreEqual).toEqual(expect.any(Function));
+  });
+  it('returns true for equal points', () => {
+    const point1 = { x: 1, y: 15 };
+    const point2 = { x: 1, y: 15 };
+    expect(isPointsAreEqual(point1, point2)).toBe(true);
+  });
+  it('returns false for non-equal points', () => {
+    const point1 = { x: 1, y: 15 };
+    const point2 = { x: 2, y: 15 };
+    const point3 = { x: 1, y: 16 };
+    expect(isPointsAreEqual(point1, point2)).toBe(false);
+    expect(isPointsAreEqual(point1, point3)).toBe(false);
+  });
+});
+
+describe('isValidMove()', () => {
+  it('is a function', () => {
+    expect(isSwapPossible).toEqual(expect.any(Function));
+  });
+  it('returns true when move is possible (2x2 matrix)', () => {
+    const field = [[1, 2], [3, 0]];
+    const emptyCellPoint = { x: 1, y: 1 };
+    expect(isSwapPossible(field, { x: 1, y: 0 }, emptyCellPoint)).toBe(true);
+    expect(isSwapPossible(field, { x: 0, y: 1 }, emptyCellPoint)).toBe(true);
+  });
+  it('returns true when move is possible (3x3 matrix)', () => {
+    const field = [[1, 2, 3], [4, 0, 6], [7, 8, 5]];
+    const emptyCellPoint = { x: 1, y: 1 };
+    expect(isSwapPossible(field, { x: 1, y: 0 }, emptyCellPoint)).toBe(true);
+    expect(isSwapPossible(field, { x: 0, y: 1 }, emptyCellPoint)).toBe(true);
+    expect(isSwapPossible(field, { x: 2, y: 1 }, emptyCellPoint)).toBe(true);
+    expect(isSwapPossible(field, { x: 1, y: 2 }, emptyCellPoint)).toBe(true);
+  });
+  it('returns false when move is not possible (3x3 matrix)', () => {
+    const field = [[1, 2, 3], [4, 0, 6], [7, 8, 5]];
+    const emptyCellPoint = { x: 1, y: 1 };
+    expect(isSwapPossible(field, { x: 0, y: 0 }, emptyCellPoint)).toBe(false);
+    expect(isSwapPossible(field, { x: 0, y: 2 }, emptyCellPoint)).toBe(false);
+    expect(isSwapPossible(field, { x: 2, y: 0 }, emptyCellPoint)).toBe(false);
+    expect(isSwapPossible(field, { x: 2, y: 2 }, emptyCellPoint)).toBe(false);
   });
 });
