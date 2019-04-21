@@ -7,6 +7,7 @@ import {
   swapPoints,
   getValidMovesForPoint,
   isPointsAreEqual,
+  isValidMove,
 } from '../utils';
 
 describe('generateField()', () => {
@@ -299,5 +300,30 @@ describe('isPointsAreEqual()', () => {
     const point3 = { x: 1, y: 16 };
     expect(isPointsAreEqual(point1, point2)).toBe(false);
     expect(isPointsAreEqual(point1, point3)).toBe(false);
+  });
+});
+
+describe('isValidMove()', () => {
+  it('is a function', () => {
+    expect(isValidMove).toEqual(expect.any(Function));
+  });
+  it('returns true when move is possible (2x2 matrix)', () => {
+    const field = [[1, 2], [3, 0]];
+    expect(isValidMove(field, { x: 1, y: 0 })).toBe(true);
+    expect(isValidMove(field, { x: 0, y: 1 })).toBe(true);
+  });
+  it('returns true when move is possible (3x3 matrix)', () => {
+    const field = [[1, 2, 3], [4, 0, 6], [7, 8, 5]];
+    expect(isValidMove(field, { x: 1, y: 0 })).toBe(true);
+    expect(isValidMove(field, { x: 0, y: 1 })).toBe(true);
+    expect(isValidMove(field, { x: 2, y: 1 })).toBe(true);
+    expect(isValidMove(field, { x: 1, y: 2 })).toBe(true);
+  });
+  it('returns false when move is not possible (3x3 matrix)', () => {
+    const field = [[1, 2, 3], [4, 0, 6], [7, 8, 5]];
+    expect(isValidMove(field, { x: 0, y: 0 })).toBe(false);
+    expect(isValidMove(field, { x: 0, y: 2 })).toBe(false);
+    expect(isValidMove(field, { x: 2, y: 0 })).toBe(false);
+    expect(isValidMove(field, { x: 2, y: 2 })).toBe(false);
   });
 });
