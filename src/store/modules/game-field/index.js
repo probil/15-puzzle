@@ -54,8 +54,9 @@ const actions = {
     const possibleMoves = getValidMovesForPoint(state.grid, emptyCellPoint);
     const isPossibleMove = possibleMoves
       .some(move => (move.x === clickedPoint.x && move.y === clickedPoint.y));
-    if (!isPossibleMove) return;
+    if (!isPossibleMove) return false;
     commit('swapPoints', { point1: emptyCellPoint, point2: clickedPoint });
+    return true;
   },
 };
 
