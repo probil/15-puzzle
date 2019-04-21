@@ -3,6 +3,11 @@
     <div class="app__container">
       <InfoBar>
         <Moves :value="moves" slot="left"></Moves>
+        <Timer
+          slot="right"
+          :is-running="isGameStarted"
+          :started-at="startedAt"
+        ></Timer>
       </InfoBar>
       <PlayBox>
         <GameField
@@ -19,6 +24,7 @@
   import GameField from './GameField'
   import Moves from './Moves'
   import InfoBar from './InfoBar'
+  import Timer from './Timer'
 
   export default {
     components: {
@@ -26,11 +32,13 @@
       GameField,
       Moves,
       InfoBar,
+      Timer,
     },
     computed: {
       ...mapGetters(['isGameStarted']),
       ...mapGetters('gameField', ['grid']),
       ...mapGetters('moves', ['moves']),
+      ...mapGetters('timer', ['startedAt']),
     },
     methods: {
       ...mapActions(['startNewGame', 'moveTileByPoint']),
