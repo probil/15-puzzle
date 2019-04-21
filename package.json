@@ -9,8 +9,8 @@
     "test": "jest",
     "test:cov": "jest --coverage",
     "test:watch": "jest --watch",
-    "lint": "eslint src/**.js",
-    "lint:fix": "eslint --fix src/**.js"
+    "lint": "eslint src/**/*.{js,vue}",
+    "lint:fix": "eslint --fix src/**/*.{js,vue}"
   },
   "repository": {
     "type": "git",
