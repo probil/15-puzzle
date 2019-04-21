@@ -1,11 +1,15 @@
 <template>
   <div class="app">
     <PlayBox>
-      <GameField/>
+      <GameField
+        :grid="grid"
+        @tile-clicked="moveTileByPoint"
+      ></GameField>
     </PlayBox>
   </div>
 </template>
 <script>
+  import { mapGetters, mapActions } from 'vuex'
   import PlayBox from './PlayBox'
   import GameField from './GameField'
 
@@ -13,6 +17,16 @@
     components: {
       PlayBox,
       GameField,
+    },
+    computed: {
+      ...mapGetters(['isGameStarted']),
+      ...mapGetters('gameField', ['grid']),
+    },
+    methods: {
+      ...mapActions(['startNewGame', 'moveTileByPoint']),
+    },
+    beforeMount() {
+      this.startNewGame();
     }
   }
 </script>
