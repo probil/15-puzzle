@@ -1,7 +1,10 @@
 /* eslint-disable no-shadow, no-param-reassign */
+import { differenceInSeconds } from '../../../utils/date';
+
 const state = {
   isStarted: false,
   startedAt: null,
+  finishedAt: null,
 };
 
 const mutations = {
@@ -11,11 +14,13 @@ const mutations = {
   },
   stop(state) {
     state.isStarted = false;
+    state.finishedAt = new Date().toISOString();
   },
 };
 
 const getters = {
   startedAt: state => state.startedAt,
+  totalTime: state => differenceInSeconds(state.finishedAt, state.startedAt),
 };
 
 const actions = {
