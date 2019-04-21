@@ -57,7 +57,7 @@ export default {
       line-height 1
 
     &__stats
-      margin-top 25px
+      margin 25px auto 0
       width 330px
       display flex
       justify-content space-between
