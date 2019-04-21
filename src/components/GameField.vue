@@ -7,29 +7,29 @@
         :style="{ order: y * 4 + x }"
         :value="cell"
         :is-invisible="cell === 0"
-        @click.native="tryToMoveTileByPoint({ x, y })"
+        @click.native="handleClick({ x, y })"
       />
     </template>
   </div>
 </template>
 <script>
   import Tile from './Tile'
-  import { mapGetters, mapActions } from 'vuex'
 
   export default {
     components: {
       Tile,
     },
-    computed: {
-      ...mapGetters('gameField', ['grid'])
+    props: {
+      grid: {
+        type: Array,
+        required: true
+      }
     },
     methods: {
-      ...mapActions('gameField', ['init', 'shuffle', 'tryToMoveTileByPoint'])
+      handleClick(point) {
+        this.$emit('tile-clicked', point)
+      }
     },
-    beforeMount() {
-      this.init();
-      this.shuffle();
-    }
   }
 </script>
 <style lang="stylus">
