@@ -44,7 +44,8 @@ npm run lint:fix
 
 Roadmap:
 - [X] Implement 15-puzzle (naive shuffling algorithm)
-- [ ] Host on netlify
+- [X] Host on netlify
 - [X] Improve look & feel
+- [ ] Animations for swapping tiles
 - [ ] Use proper algorithm for shuffling (e.g. with A<sup>*</sup> algorithm to ensure solvability)
 - [ ] Introduce levels of difficulty
